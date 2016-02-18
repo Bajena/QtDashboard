@@ -11,13 +11,15 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Dashboard
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         mainwindow.cpp \
-    widgetbase.cpp
+    Widgets/dashboardwidget.cpp \
+    Widgets/dashboardpluginbase.cpp
 
 HEADERS  += mainwindow.h \
-    widgetbase.h
+    Widgets/dashboardwidget.h \
+    Widgets/dashboardpluginbase.h
 
 FORMS    += mainwindow.ui \
-    widgetbase.ui
+    Widgets/dashboardwidget.ui \
+    Widgets/dashboardpluginbase.ui

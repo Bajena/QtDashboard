@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>570</x>
-      <y>120</y>
+      <y>10</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -27,66 +27,16 @@
      <string>PushButton</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="DashboardWidget" name="dashboard" native="true">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>30</y>
-      <width>101</width>
-      <height>41</height>
+      <x>10</x>
+      <y>10</y>
+      <width>551</width>
+      <height>421</height>
      </rect>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>9</x>
-      <y>9</y>
-      <width>541</width>
-      <height>431</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>539</width>
-       <height>429</height>
-      </rect>
-     </property>
-     <widget class="QWidget" name="gridLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>-1</y>
-        <width>541</width>
-        <height>431</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout"/>
-     </widget>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>670</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuDada">
-    <property name="title">
-     <string>dada</string>
-    </property>
-   </widget>
-   <addaction name="menuDada"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -99,6 +49,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>DashboardWidget</class>
+   <extends>QWidget</extends>
+   <header>../Dashboard/Widgets/dashboardwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WidgetBase</class>
- <widget class="QWidget" name="WidgetBase">
+ <class>DashboardPluginBase</class>
+ <widget class="QWidget" name="DashboardPluginBase">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,8 +18,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>381</width>
-     <height>281</height>
+     <width>131</width>
+     <height>91</height>
     </rect>
    </property>
   </widget>
