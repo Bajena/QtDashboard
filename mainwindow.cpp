@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "simpleanimationplugin.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,5 +16,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_drawButton_clicked()
 {
-    ui->dashboard->AddPlugin(new DashboardPluginBase());
+    ui->dashboard->addPlugin(
+                new DashboardPluginBase(
+                    new SimpleAnimationPlugin()
+                ));
 }

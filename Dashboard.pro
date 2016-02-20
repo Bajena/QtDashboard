@@ -14,11 +14,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Widgets/dashboardwidget.cpp \
-    Widgets/dashboardpluginbase.cpp
+    Widgets/dashboardpluginbase.cpp \
+    simpleanimationplugin.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/dashboardwidget.h \
-    Widgets/dashboardpluginbase.h
+    Widgets/dashboardpluginbase.h \
+    plugininterface.h \
+    simpleanimationplugin.h
 
 FORMS    += mainwindow.ui \
     Widgets/dashboardwidget.ui \

@@ -15,7 +15,7 @@ class DashboardWidget : public QWidget
 public:
     explicit DashboardWidget(QWidget *parent = 0);
     ~DashboardWidget();
-    void AddPlugin(DashboardPluginBase *plugin);
+    void addPlugin(DashboardPluginBase *plugin);
 
 private:
     QList<DashboardPluginBase*> plugins;

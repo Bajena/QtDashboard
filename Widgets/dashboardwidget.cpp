@@ -14,7 +14,7 @@ DashboardWidget::~DashboardWidget()
     delete ui;
 }
 
-void DashboardWidget::AddPlugin(DashboardPluginBase *plugin)
+void DashboardWidget::addPlugin(DashboardPluginBase *plugin)
 {
     int count = plugins.count();
 
