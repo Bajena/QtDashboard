@@ -13,7 +13,7 @@ public:
 
 QT_BEGIN_NAMESPACE
 
-#define PluginInterface_iid "Qt.PluginInterface"
+#define PluginInterface_iid "Dashboard.PluginInterface"
 
 Q_DECLARE_INTERFACE(PluginInterface, PluginInterface_iid)
 QT_END_NAMESPACE

@@ -1,12 +1,14 @@
 #ifndef SIMPLEANIMATIONPLUGIN_H
 #define SIMPLEANIMATIONPLUGIN_H
 
+#include <QObject>
 #include <QGraphicsItem>
+#include <Dashboard/plugininterface.h>
 
-#include "plugininterface.h"
-
-class SimpleAnimationPlugin : public PluginInterface
+class SimpleAnimationPlugin : public QObject, public PluginInterface
 {
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "Dashboard.PluginInterface" FILE "simpleanimationplugin.json")
     Q_INTERFACES(PluginInterface)
 
 public:

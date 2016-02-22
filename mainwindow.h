@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    QList<QObject*> plugins;
 };
 
 #endif // MAINWINDOW_H
