@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
+    <width>741</width>
     <height>498</height>
    </rect>
   </property>
@@ -14,17 +14,20 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="drawButton">
+   <widget class="QPushButton" name="addPluginButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>10</y>
+      <x>610</x>
+      <y>170</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>Add</string>
     </property>
    </widget>
    <widget class="DashboardWidget" name="dashboard" native="true">
@@ -34,6 +37,16 @@
       <y>10</y>
       <width>551</width>
       <height>421</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="pluginsList">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>10</y>
+      <width>141</width>
+      <height>151</height>
      </rect>
     </property>
    </widget>

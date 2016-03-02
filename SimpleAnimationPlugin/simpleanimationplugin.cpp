@@ -19,3 +19,8 @@ void SimpleAnimationPlugin::draw(QGraphicsScene &scene)
 }
 
 int SimpleAnimationPlugin::refreshSpeed() { return 100; }
+
+PluginInterface* SimpleAnimationPluginFactory::getInstance()
+{
+  return new SimpleAnimationPlugin();
+}

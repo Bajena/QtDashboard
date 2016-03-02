@@ -16,9 +16,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_drawButton_clicked();
+    void on_addPluginButton_clicked();
+
+    void on_pluginsList_currentRowChanged(int currentRow);
 
 private:
+    void populatePluginsList();
     Ui::MainWindow *ui;
     QList<QObject*> plugins;
 };

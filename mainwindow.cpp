@@ -9,6 +9,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    populatePluginsList();
+}
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::populatePluginsList()
+{
     QDir pluginsDir = QDir(qApp->applicationDirPath());
     pluginsDir.cdUp();
     pluginsDir.cdUp();
@@ -19,20 +28,26 @@ MainWindow::MainWindow(QWidget *parent) :
         QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
         QObject *plugin = loader.instance();
         if (plugin) {
+            ui->pluginsList->addItem(new QListWidgetItem(pluginsDir.absoluteFilePath(fileName)));
             plugins.append(plugin);
         }
     }
 }
 
-MainWindow::~MainWindow()
+void MainWindow::on_addPluginButton_clicked()
 {
-    delete ui;
-}
+    int widgetIndex = ui->pluginsList->currentRow();
+    if (widgetIndex == -1) return;
 
-void MainWindow::on_drawButton_clicked()
-{
+    PluginInterfaceFactory* pluginFactory = qobject_cast<PluginInterfaceFactory*>(plugins[widgetIndex]);
+    PluginInterface* plugin = pluginFactory->getInstance();
     ui->dashboard->addPlugin(
                 new DashboardPluginBase(
-                    qobject_cast<PluginInterface*>(plugins[0])
+                    plugin
                 ));
+}
+
+void MainWindow::on_pluginsList_currentRowChanged(int currentRow)
+{
+    ui->addPluginButton->setDisabled(currentRow == -1);
 }
