@@ -15,14 +15,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     Widgets/dashboardwidget.cpp \
     Widgets/dashboardpluginbase.cpp \
-    simpleanimationplugin.cpp
+    widgetplaceholder.cpp \
+    pluginrepository.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/dashboardwidget.h \
     Widgets/dashboardpluginbase.h \
     plugininterface.h \
-    simpleanimationplugin.h
+    widgetplaceholder.h \
+    pluginrepository.h
 
 FORMS    += mainwindow.ui \
     Widgets/dashboardwidget.ui \
-    Widgets/dashboardpluginbase.ui
+    Widgets/dashboardpluginbase.ui \
+    widgetplaceholder.ui
