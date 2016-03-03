@@ -14,13 +14,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Widgets/dashboardwidget.cpp \
-    Widgets/dashboardpluginbase.cpp
+    Widgets/dashboardpluginbase.cpp \
+    widgetplaceholder.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/dashboardwidget.h \
     Widgets/dashboardpluginbase.h \
-    plugininterface.h
+    plugininterface.h \
+    widgetplaceholder.h
 
 FORMS    += mainwindow.ui \
     Widgets/dashboardwidget.ui \
-    Widgets/dashboardpluginbase.ui
+    Widgets/dashboardpluginbase.ui \
+    widgetplaceholder.ui
