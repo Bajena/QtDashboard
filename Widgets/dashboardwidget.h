@@ -21,8 +21,8 @@ private:
     QList<DashboardPluginBase*> plugins;
     Ui::DashboardWidget *ui;
     void populatePlaceholders();
-    int maxWidgets = 6;
-    int columns = 2;
+    int maxWidgets;
+    int columns;
 };
 
 #endif // DASHBOARDWIDGET_H

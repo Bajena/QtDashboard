@@ -14,7 +14,7 @@ void SimpleAnimationPlugin::draw(QGraphicsScene &scene)
     }
     else
     {
-       this->rectangle->setPos(rectangle->x() + 1, rectangle->y());
+       this->rectangle->setPos(rectangle->x() - 1, rectangle->y());
     }
 }
 
