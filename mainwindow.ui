@@ -23,25 +23,7 @@
         <height>0</height>
        </size>
       </property>
-      <zorder>horizontalLayoutWidget</zorder>
      </widget>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QListWidget" name="pluginsList"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="addPluginButton">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Add</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
    </layout>
   </widget>

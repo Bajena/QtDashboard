@@ -3,18 +3,27 @@
 
 #include <QMenu>
 #include <QDebug>
+#include <pluginrepository.h>
+#include <QSignalMapper>
 
-DashboardPluginBase::DashboardPluginBase(PluginInterface *pluginInterface, QWidget *parent) :
+DashboardPluginBase::DashboardPluginBase(PluginInterfaceFactory *pluginInterfaceFactory, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DashboardPluginBase)
 {
+    this->pluginInstance = NULL;
+    this->animationTimer = NULL;
+    this->graphicsScene = NULL;
+
     ui->setupUi(this);
 
-    graphicsScene = new QGraphicsScene(this);
-    ui->graphicsView->setScene(graphicsScene);
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
-    this->setPlugin(pluginInterface);
+    if (pluginInterfaceFactory) {
+        this->buildPluginInstance(pluginInterfaceFactory);
+    }
+    else {
+        this->clearPluginInstance();
+    }
 }
 
 DashboardPluginBase::~DashboardPluginBase()
@@ -24,16 +33,16 @@ DashboardPluginBase::~DashboardPluginBase()
 
 void DashboardPluginBase::animate()
 {
-    pluginInterface->draw(*graphicsScene);
+    this->pluginInstance->draw(*graphicsScene);
 }
 
-void DashboardPluginBase::setPlugin(PluginInterface *plugin)
+void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
 {
-    if (!plugin)
+    if (!instance)
     {
-        ui->placeholderLabel->show();
+        ui->placeholderButton->show();
         ui->graphicsView->hide();
-        this->pluginInterface = NULL;
+        this->pluginInstance = NULL;
 
         if (this->animationTimer)
         {
@@ -43,34 +52,72 @@ void DashboardPluginBase::setPlugin(PluginInterface *plugin)
     }
     else
     {
-        this->pluginInterface = plugin;
+        if (graphicsScene) delete graphicsScene;
+        graphicsScene = new QGraphicsScene(this);
+        ui->graphicsView->setScene(graphicsScene);
+        this->pluginInstance = instance;
         this->animationTimer = new QTimer(this);
         connect(this->animationTimer, SIGNAL(timeout()), this, SLOT(animate()));
-        this->animationTimer->start(pluginInterface->refreshSpeed());
+        this->animationTimer->start(pluginInstance->refreshSpeed());
         ui->graphicsView->show();
-        ui->placeholderLabel->hide();
+        ui->placeholderButton->hide();
     }
 }
 
-void DashboardPluginBase::clearPlugin()
+void DashboardPluginBase::buildPluginInstance(PluginInterfaceFactory *factory)
 {
-    setPlugin(NULL);
+    this->setPluginInstance(factory->getInstance());
+}
+
+void DashboardPluginBase::buildPluginInstance(QString pluginName)
+{
+    PluginInterfaceFactory *factory = PluginRepository::getInstance()->findFactoryByPluginName(pluginName);
+    this->buildPluginInstance(factory);
+}
+
+
+void DashboardPluginBase::clearPluginInstance()
+{
+    this->setPluginInstance(NULL);
 }
 
 void DashboardPluginBase::on_DashboardPluginBase_customContextMenuRequested(const QPoint &pos)
 {
-    QPoint globalPos = this->mapToGlobal(pos);
+    const QPoint globalPos = this->mapToGlobal(pos);
+    showContextMenu(globalPos);
+}
 
+void DashboardPluginBase::on_placeholderButton_clicked()
+{
+    const QPoint globalPos = QCursor::pos();
+    showContextMenu(globalPos);
+}
+
+void DashboardPluginBase::showContextMenu(const QPoint &globalPos)
+{
     QMenu contextMenu;
 
-    if (this->pluginInterface)
+    if (this->pluginInstance)
     {
        QAction *action = new QAction(tr("Remove widget"), this);
-       connect(action, SIGNAL(triggered()), this, SLOT(clearPlugin()));
+       connect(action, SIGNAL(triggered()), this, SLOT(clearPluginInstance()));
        contextMenu.addAction(action);
        contextMenu.addAction(action);
     }
     else {
+        QMenu* pluginPickerSubMenu = new QMenu("Add widget");
+
+        foreach (PluginData *pluginData, PluginRepository::getInstance()->plugins)
+        {
+            QAction *action = new QAction(pluginData->name, this);
+            QSignalMapper* mapper = new QSignalMapper(this);
+
+            mapper->setMapping(action, pluginData->name);
+            connect(action, SIGNAL(triggered()), mapper, SLOT(map()));
+            connect(mapper, SIGNAL(mapped(QString)), this, SLOT(buildPluginInstance(QString)));
+            pluginPickerSubMenu->addAction(action);
+        }
+        contextMenu.addMenu(pluginPickerSubMenu);
         // Change plugin action
     }
 

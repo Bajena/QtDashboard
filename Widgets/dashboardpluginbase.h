@@ -17,20 +17,25 @@ class DashboardPluginBase : public QWidget
 
 public:
     DashboardPluginBase(QWidget *parent = 0);
-    DashboardPluginBase(PluginInterface *pluginInterface, QWidget *parent = 0);
+    DashboardPluginBase(PluginInterfaceFactory *pluginInterfaceFactory, QWidget *parent = 0);
     ~DashboardPluginBase();
-    void setPlugin(PluginInterface*);
 
 private:
     Ui::DashboardPluginBase *ui;
-    QGraphicsScene *graphicsScene = 0;
-    PluginInterface *pluginInterface = 0;
-    QTimer *animationTimer = 0;
+    QGraphicsScene *graphicsScene;
+    PluginInterface *pluginInstance;
+    QTimer *animationTimer;
+
+    void showContextMenu(const QPoint&);
+    void setPluginInstance(PluginInterface*);
 
 private slots:
     void animate();
-    void clearPlugin();
+    void clearPluginInstance();
+    void buildPluginInstance(PluginInterfaceFactory* factory);
+    void buildPluginInstance(QString pluginName);
     void on_DashboardPluginBase_customContextMenuRequested(const QPoint &pos);
+    void on_placeholderButton_clicked();
 };
 
 #endif // DASHBOARDPLUGINBASE_H

@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     Widgets/dashboardwidget.cpp \
     Widgets/dashboardpluginbase.cpp \
     widgetplaceholder.cpp \
-    pluginrepository.cpp
+    pluginrepository.cpp \
+    plugindata.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/dashboardwidget.h \
     Widgets/dashboardpluginbase.h \
     plugininterface.h \
     widgetplaceholder.h \
-    pluginrepository.h
+    pluginrepository.h \
+    plugindata.h
 
 FORMS    += mainwindow.ui \
     Widgets/dashboardwidget.ui \

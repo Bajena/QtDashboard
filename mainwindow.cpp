@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "pluginrepository.h"
 #include "ui_mainwindow.h"
 
 #include <QDir>
@@ -24,30 +25,12 @@ void MainWindow::populatePluginsList()
     pluginsDir.cd("Dashboard");
     pluginsDir.cd("plugins");
 
-    foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
-        QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
+    foreach (QString filename, pluginsDir.entryList(QDir::Files)) {
+        QString filepath = pluginsDir.absoluteFilePath(filename);
+        QPluginLoader loader(filepath);
         QObject *plugin = loader.instance();
         if (plugin) {
-            ui->pluginsList->addItem(new QListWidgetItem(pluginsDir.absoluteFilePath(fileName)));
-            plugins.append(plugin);
+            PluginRepository::getInstance()->addPlugin(qobject_cast<PluginInterfaceFactory*>(plugin), filepath, filename);
         }
     }
-}
-
-void MainWindow::on_addPluginButton_clicked()
-{
-    int widgetIndex = ui->pluginsList->currentRow();
-    if (widgetIndex == -1) return;
-
-    PluginInterfaceFactory* pluginFactory = qobject_cast<PluginInterfaceFactory*>(plugins[widgetIndex]);
-    PluginInterface* plugin = pluginFactory->getInstance();
-    ui->dashboard->addPlugin(
-                new DashboardPluginBase(
-                    plugin
-                ));
-}
-
-void MainWindow::on_pluginsList_currentRowChanged(int currentRow)
-{
-    ui->addPluginButton->setDisabled(currentRow == -1);
 }
