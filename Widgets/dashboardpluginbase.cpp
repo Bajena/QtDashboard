@@ -118,7 +118,6 @@ void DashboardPluginBase::showContextMenu(const QPoint &globalPos)
             pluginPickerSubMenu->addAction(action);
         }
         contextMenu.addMenu(pluginPickerSubMenu);
-        // Change plugin action
     }
 
     contextMenu.exec(globalPos);
