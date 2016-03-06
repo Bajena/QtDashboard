@@ -52,11 +52,6 @@ void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
     }
     this->animationTimer = NULL;
 
-    if (graphicsScene)
-    {
-        delete graphicsScene;
-    }
-
     if (!instance)
     {
         ui->placeholderButton->show();

@@ -1,5 +1,7 @@
 #include "analogclockplugin.h"
 
+#include <QTime>
+
 
 AnalogClockPlugin::AnalogClockPlugin()
 {
@@ -7,23 +9,40 @@ AnalogClockPlugin::AnalogClockPlugin()
 
 AnalogClockPlugin::~AnalogClockPlugin()
 {
-//    delete minuteHand;
-//    delete secondHand;
-//    delete hourHand;
+    delete secondHand;
+    delete minuteHand;
+    delete hourHand;
 }
 
 void AnalogClockPlugin::initializeScene(QGraphicsScene &scene)
 {
-//    new QPolygonF(new QVector<QPointF>());
-//    this->secondHand = new QGraphicsPolygonItem(
+    QPolygonF hourPolygon;
+    hourPolygon << QPointF(-25, 0) << QPointF(25, 0) << QPointF(0, -75);
+    this->hourHand = new QGraphicsPolygonItem(hourPolygon);
+//    this->hourHand->setTransformOriginPoint(this->hourHand->boundingRect().width() / 2, this->hourHand->boundingRect().height());
+    scene.addItem(this->hourHand);
 
-//                )
-    scene.addRect(0,0,10,10);
+
+    QPolygonF minutePolygon;
+    hourPolygon << QPointF(-25, 0) << QPointF(25, 0) << QPointF(0, -75);
+    this->minuteHand = new QGraphicsPolygonItem(minutePolygon);
+//    this->minuteHand->setTransformOriginPoint(this->minuteHand->boundingRect().width() / 2, this->minuteHand->boundingRect().height());
+    scene.addItem(this->minuteHand);
+
+
+    QPolygonF secondPolygon;
+    hourPolygon << QPointF(-25, 0) << QPointF(25, 0) << QPointF(0, -75);
+    this->secondHand = new QGraphicsPolygonItem(secondPolygon);
+//    this->secondHand->setTransformOriginPoint(this->secondHand->boundingRect().width() / 2, this->secondHand->boundingRect().height());
+    scene.addItem(this->secondHand);
 }
 
 void AnalogClockPlugin::draw(QGraphicsScene &scene)
 {
-    scene.addRect(0,0,100,100);
+    QTime time = QTime::currentTime();
+     this->hourHand->setRotation(30.0 * ((time.hour() + time.minute() / 60.0)));
+    this->minuteHand->setRotation(6.0 * ((time.minute() + time.second() / 60.0)));
+    this->secondHand->setRotation(time.second());
 }
 
 int AnalogClockPlugin::refreshSpeed()
