@@ -38,24 +38,35 @@ void DashboardPluginBase::animate()
 
 void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
 {
+
+    if (this->pluginInstance)
+    {
+        delete this->pluginInstance;
+    }
+    this->pluginInstance = instance;
+
+    if (this->animationTimer)
+    {
+        this->animationTimer->stop();
+        delete animationTimer;
+    }
+    this->animationTimer = NULL;
+
+    if (graphicsScene)
+    {
+        delete graphicsScene;
+    }
+
     if (!instance)
     {
         ui->placeholderButton->show();
         ui->graphicsView->hide();
-        this->pluginInstance = NULL;
-
-        if (this->animationTimer)
-        {
-            this->animationTimer->stop();
-            delete animationTimer;
-        }
     }
     else
     {
-        if (graphicsScene) delete graphicsScene;
         graphicsScene = new QGraphicsScene(this);
+        this->pluginInstance->initializeScene(*graphicsScene);
         ui->graphicsView->setScene(graphicsScene);
-        this->pluginInstance = instance;
         this->animationTimer = new QTimer(this);
         connect(this->animationTimer, SIGNAL(timeout()), this, SLOT(animate()));
         this->animationTimer->start(pluginInstance->refreshSpeed());

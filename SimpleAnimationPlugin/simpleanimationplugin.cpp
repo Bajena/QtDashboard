@@ -9,7 +9,7 @@ void SimpleAnimationPlugin::draw(QGraphicsScene &scene)
 {
     if (!rectAdded)
     {
-        this->rectangle = scene.addRect(0,0,10,10);//.addRect(100, 0, 80, 100);
+        this->rectangle = scene.addRect(0,0,10,10);
         this->rectAdded = true;
     }
     else

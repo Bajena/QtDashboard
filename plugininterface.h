@@ -9,6 +9,7 @@ class PluginInterface
     public:
         virtual ~PluginInterface() {}
         virtual void draw(QGraphicsScene &scene) = 0;
+        virtual void initializeScene(QGraphicsScene &scene) = 0;
         virtual int refreshSpeed() = 0;
 };
 
