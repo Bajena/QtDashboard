@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsItem>
-#include <QtDashboard/plugininterface.h>
+#include <Dashboard/plugininterface.h>
 
 class AnalogClockPlugin : public PluginInterface
 {

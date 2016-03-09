@@ -17,19 +17,18 @@ AnalogClockPlugin::~AnalogClockPlugin()
 void AnalogClockPlugin::initializeScene(QGraphicsScene &scene)
 {
     QPolygonF hourPolygon;
-    hourPolygon << QPointF(-20, 0) << QPointF(20, 0) << QPointF(0, -45);
+    hourPolygon << QPointF(7, 8) << QPointF(-7, 8) << QPointF(0, -40);
     this->hourHand = new QGraphicsPolygonItem(hourPolygon);
     scene.addItem(this->hourHand);
 
 
     QPolygonF minutePolygon;
-    minutePolygon << QPointF(-15, 0) << QPointF(15, 0) << QPointF(0, -60);
+    minutePolygon << QPointF(7, 8) << QPointF(-7, 8) << QPointF(0, -70);
     this->minuteHand = new QGraphicsPolygonItem(minutePolygon);
     scene.addItem(this->minuteHand);
 
-
     QPolygonF secondPolygon;
-    secondPolygon << QPointF(-10, 0) << QPointF(10, 0) << QPointF(0, -75);
+    secondPolygon << QPointF(7, 8) << QPointF(-7, 8) << QPointF(0, -90);
     this->secondHand = new QGraphicsPolygonItem(secondPolygon);
     scene.addItem(this->secondHand);
 
