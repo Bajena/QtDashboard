@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsItem>
-#include <Dashboard/plugininterface.h>
+#include <QtDashboard/plugininterface.h>
 
 class AnalogClockPlugin : public PluginInterface
 {
@@ -18,6 +18,8 @@ private:
         QGraphicsPolygonItem *secondHand;
         QGraphicsPolygonItem *minuteHand;
         QGraphicsPolygonItem *hourHand;
+
+        void rotateHands();
 };
 
 class AnalogClockPluginFactory : public QObject, public PluginInterfaceFactory

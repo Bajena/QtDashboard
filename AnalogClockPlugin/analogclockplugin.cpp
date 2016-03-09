@@ -32,14 +32,13 @@ void AnalogClockPlugin::initializeScene(QGraphicsScene &scene)
     secondPolygon << QPointF(-10, 0) << QPointF(10, 0) << QPointF(0, -75);
     this->secondHand = new QGraphicsPolygonItem(secondPolygon);
     scene.addItem(this->secondHand);
+
+    rotateHands();
 }
 
 void AnalogClockPlugin::draw(QGraphicsScene &scene)
 {
-    QTime time = QTime::currentTime();
-    this->hourHand->setRotation(30.0 * ((time.hour() + time.minute() / 60.0)));
-    this->minuteHand->setRotation(6.0 * ((time.minute() + time.second() / 60.0)));
-    this->secondHand->setRotation(6.0 * time.second());
+    rotateHands();
 }
 
 int AnalogClockPlugin::refreshSpeed()
@@ -47,7 +46,16 @@ int AnalogClockPlugin::refreshSpeed()
     return 1000;
 }
 
+void AnalogClockPlugin::rotateHands()
+{
+    QTime time = QTime::currentTime();
+    this->hourHand->setRotation(30.0 * ((time.hour() + time.minute() / 60.0)));
+    this->minuteHand->setRotation(6.0 * ((time.minute() + time.second() / 60.0)));
+    this->secondHand->setRotation(6.0 * time.second());
+}
+
 PluginInterface *AnalogClockPluginFactory::getInstance()
 {
     return new AnalogClockPlugin();
 }
+
