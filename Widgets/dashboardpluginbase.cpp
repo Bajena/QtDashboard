@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <pluginrepository.h>
 #include <QSignalMapper>
+#include <QPaintEvent>
 
 DashboardPluginBase::DashboardPluginBase(PluginInterfaceFactory *pluginInterfaceFactory, QWidget *parent) :
     QWidget(parent),
@@ -15,7 +16,6 @@ DashboardPluginBase::DashboardPluginBase(PluginInterfaceFactory *pluginInterface
     this->graphicsScene = NULL;
 
     ui->setupUi(this);
-
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);
 
     if (pluginInterfaceFactory) {
@@ -33,12 +33,11 @@ DashboardPluginBase::~DashboardPluginBase()
 
 void DashboardPluginBase::animate()
 {
-    this->pluginInstance->draw(*graphicsScene);
+    this->pluginInstance->draw(graphicsScene);
 }
 
 void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
 {
-
     if (this->pluginInstance)
     {
         delete this->pluginInstance;
@@ -60,7 +59,7 @@ void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
     else
     {
         graphicsScene = new QGraphicsScene(this);
-        this->pluginInstance->initializeScene(*graphicsScene);
+        this->pluginInstance->initializeScene(graphicsScene);
         ui->graphicsView->setScene(graphicsScene);
         graphicsScene->setSceneRect(-ui->graphicsView->width()/2, -ui->graphicsView->height()/2, ui->graphicsView->width(), ui->graphicsView->height());
         this->animationTimer = new QTimer(this);

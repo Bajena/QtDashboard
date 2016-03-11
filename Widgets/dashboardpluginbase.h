@@ -19,7 +19,6 @@ public:
     DashboardPluginBase(QWidget *parent = 0);
     DashboardPluginBase(PluginInterfaceFactory *pluginInterfaceFactory, QWidget *parent = 0);
     ~DashboardPluginBase();
-
 private:
     Ui::DashboardPluginBase *ui;
     QGraphicsScene *graphicsScene;
@@ -28,6 +27,7 @@ private:
 
     void showContextMenu(const QPoint&);
     void setPluginInstance(PluginInterface*);
+
 
 private slots:
     void animate();

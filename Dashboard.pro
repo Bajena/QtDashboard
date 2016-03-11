@@ -17,7 +17,8 @@ SOURCES += main.cpp\
     Widgets/dashboardpluginbase.cpp \
     widgetplaceholder.cpp \
     pluginrepository.cpp \
-    plugindata.cpp
+    plugindata.cpp \
+    widgetgraphicsview.cpp
 
 HEADERS  += mainwindow.h \
     Widgets/dashboardwidget.h \
@@ -25,7 +26,8 @@ HEADERS  += mainwindow.h \
     plugininterface.h \
     widgetplaceholder.h \
     pluginrepository.h \
-    plugindata.h
+    plugindata.h \
+    widgetgraphicsview.h
 
 FORMS    += mainwindow.ui \
     Widgets/dashboardwidget.ui \

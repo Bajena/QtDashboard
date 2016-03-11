@@ -7,17 +7,23 @@
 
 class AnalogClockPlugin : public PluginInterface
 {
+    Q_OBJECT
 public:
     AnalogClockPlugin();
     ~AnalogClockPlugin();
-    virtual void initializeScene(QGraphicsScene &scene) Q_DECL_OVERRIDE;
-    virtual void draw(QGraphicsScene &scene) Q_DECL_OVERRIDE;
+    virtual void initializeScene(QGraphicsScene *scene) Q_DECL_OVERRIDE;
+    virtual void draw(QGraphicsScene *scene) Q_DECL_OVERRIDE;
     virtual int refreshSpeed() Q_DECL_OVERRIDE;
 
+private slots:
+    void scaleContents(const QRectF &);
+
 private:
+        const qreal BASE_SIZE = 200.0;
         QGraphicsPolygonItem *secondHand;
         QGraphicsPolygonItem *minuteHand;
         QGraphicsPolygonItem *hourHand;
+        QGraphicsScene *graphicsScene;
 
         void rotateHands();
 };
