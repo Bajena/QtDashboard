@@ -123,6 +123,11 @@ void AnalogClockPlugin::changeTheme()
     }
 }
 
+QString AnalogClockPluginFactory::pluginName()
+{
+    return "Analog clock";
+}
+
 PluginInterface *AnalogClockPluginFactory::getInstance()
 {
     return new AnalogClockPlugin();

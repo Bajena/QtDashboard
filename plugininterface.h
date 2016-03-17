@@ -18,6 +18,7 @@ class PluginInterface : public QObject
 class PluginInterfaceFactory
 {
     public:
+        virtual QString pluginName() = 0;
         virtual PluginInterface* getInstance() = 0;
 };
 

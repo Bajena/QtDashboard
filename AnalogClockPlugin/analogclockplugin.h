@@ -39,6 +39,7 @@ class AnalogClockPluginFactory : public QObject, public PluginInterfaceFactory
     Q_PLUGIN_METADATA(IID "Dashboard.PluginInterfaceFactory" FILE "analogclockplugin.json")
     Q_INTERFACES(PluginInterfaceFactory)
     public:
+        virtual QString pluginName() Q_DECL_OVERRIDE;
         virtual PluginInterface* getInstance() Q_DECL_OVERRIDE;
 };
 

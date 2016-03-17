@@ -30,7 +30,8 @@ void MainWindow::populatePluginsList()
         QPluginLoader loader(filepath);
         QObject *plugin = loader.instance();
         if (plugin) {
-            PluginRepository::getInstance()->addPlugin(qobject_cast<PluginInterfaceFactory*>(plugin), filepath, filename);
+            PluginInterfaceFactory* instanceFactory = qobject_cast<PluginInterfaceFactory*>(plugin);
+            PluginRepository::getInstance()->addPlugin(instanceFactory, filepath, instanceFactory->pluginName());
         }
     }
 }
