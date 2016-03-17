@@ -86,7 +86,6 @@ void AnalogClockPlugin::scaleContents(const QRectF &rect)
     qDebug() << "minDimension: " << minDimension;
     qDebug() << "scale: " << minDimension / BASE_SIZE;
 
-    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
     foreach (QGraphicsItem *item, this->graphicsScene->items())
     {
         item->setScale(minDimension / BASE_SIZE);
