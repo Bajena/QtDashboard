@@ -6,7 +6,6 @@
 
 AnalogClockPlugin::AnalogClockPlugin()
 {
-
     this->currentTheme = "light";
 
     QAction *action = new QAction(tr("Change theme"), this);
