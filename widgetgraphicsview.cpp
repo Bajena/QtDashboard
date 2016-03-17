@@ -16,8 +16,6 @@ void WidgetGraphicsView::resizeEvent(QResizeEvent *event)
      {
          qreal width = event->size().width();
          qreal height = event->size().height();
-         qDebug() << "resizeEventRect:" << width << "," << height;
-         qDebug() << "graphicsWidgetRect:" << this->rect().width() << "," << this->rect().height();
 
          this->scene()->setSceneRect(-width / 2, -height / 2, width, height);
      }

@@ -64,11 +64,6 @@ void AnalogClockPlugin::draw(QGraphicsScene *scene)
     rotateHands();
 
     QRectF rect = scene->sceneRect();
-    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
-    foreach (QGraphicsItem *item, this->graphicsScene->items())
-    {
-        item->setScale(minDimension / BASE_SIZE);
-    }
 }
 
 int AnalogClockPlugin::refreshSpeed()
@@ -86,10 +81,16 @@ void AnalogClockPlugin::rotateHands()
 
 void AnalogClockPlugin::scaleContents(const QRectF &rect)
 {
-//    qDebug() << "scaleContents:" << rect;
-//    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
-//    qDebug() << "minDimension: " << minDimension;
-//    qDebug() << "scale: " << minDimension / BASE_SIZE;
+    qDebug() << "scaleContents:" << rect;
+    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
+    qDebug() << "minDimension: " << minDimension;
+    qDebug() << "scale: " << minDimension / BASE_SIZE;
+
+    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
+    foreach (QGraphicsItem *item, this->graphicsScene->items())
+    {
+        item->setScale(minDimension / BASE_SIZE);
+    }
 }
 
 PluginInterface *AnalogClockPluginFactory::getInstance()
