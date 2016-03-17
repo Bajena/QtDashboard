@@ -14,16 +14,21 @@ public:
     virtual void initializeScene(QGraphicsScene *scene) Q_DECL_OVERRIDE;
     virtual void draw(QGraphicsScene *scene) Q_DECL_OVERRIDE;
     virtual int refreshSpeed() Q_DECL_OVERRIDE;
+    virtual QList<QAction*> contextMenuActions() Q_DECL_OVERRIDE;
 
 private slots:
     void scaleContents(const QRectF &);
+    void changeTheme();
 
 private:
+        QString currentTheme;
         const qreal BASE_SIZE = 200.0;
         QGraphicsPolygonItem *secondHand;
         QGraphicsPolygonItem *minuteHand;
         QGraphicsPolygonItem *hourHand;
         QGraphicsScene *graphicsScene;
+
+        QList<QAction*> menuActions;
 
         void rotateHands();
 };

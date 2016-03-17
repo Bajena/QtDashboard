@@ -1,6 +1,7 @@
 #ifndef PLUGININTERFACE_H
 #define PLUGININTERFACE_H
 
+#include <QAction>
 #include <QGraphicsScene>
 #include <QtPlugin>
 
@@ -11,6 +12,7 @@ class PluginInterface : public QObject
         virtual void draw(QGraphicsScene *scene) = 0;
         virtual void initializeScene(QGraphicsScene *scene) = 0;
         virtual int refreshSpeed() = 0;
+        virtual QList<QAction*> contextMenuActions() = 0;
 };
 
 class PluginInterfaceFactory

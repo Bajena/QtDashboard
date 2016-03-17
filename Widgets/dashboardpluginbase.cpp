@@ -108,7 +108,10 @@ void DashboardPluginBase::showContextMenu(const QPoint &globalPos)
        QAction *action = new QAction(tr("Remove widget"), this);
        connect(action, SIGNAL(triggered()), this, SLOT(clearPluginInstance()));
        contextMenu.addAction(action);
-       contextMenu.addAction(action);
+       foreach( QAction* pluginAction, this->pluginInstance->contextMenuActions() )
+       {
+           contextMenu.addAction(pluginAction);
+       }
     }
     else {
         QMenu* pluginPickerSubMenu = new QMenu("Add widget");

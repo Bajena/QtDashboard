@@ -6,13 +6,26 @@
 
 AnalogClockPlugin::AnalogClockPlugin()
 {
+
+    this->currentTheme = "light";
+
+    QAction *action = new QAction(tr("Change theme"), this);
+    connect(action, SIGNAL(triggered()), this, SLOT(changeTheme()));
+
+    this->menuActions.append(action);
 }
 
 AnalogClockPlugin::~AnalogClockPlugin()
 {
-    delete secondHand;
-    delete minuteHand;
-    delete hourHand;
+    foreach (QGraphicsItem *item, this->graphicsScene->items())
+    {
+        delete item;
+    }
+
+    foreach (QAction *action, this->contextMenuActions())
+    {
+        delete action;
+    }
 }
 
 void AnalogClockPlugin::initializeScene(QGraphicsScene *scene)
@@ -62,13 +75,16 @@ void AnalogClockPlugin::initializeScene(QGraphicsScene *scene)
 void AnalogClockPlugin::draw(QGraphicsScene *scene)
 {
     rotateHands();
-
-    QRectF rect = scene->sceneRect();
 }
 
 int AnalogClockPlugin::refreshSpeed()
 {
     return 1000;
+}
+
+QList<QAction *> AnalogClockPlugin::contextMenuActions()
+{
+    return this->menuActions;
 }
 
 void AnalogClockPlugin::rotateHands()
@@ -89,6 +105,21 @@ void AnalogClockPlugin::scaleContents(const QRectF &rect)
     foreach (QGraphicsItem *item, this->graphicsScene->items())
     {
         item->setScale(minDimension / BASE_SIZE);
+    }
+}
+
+void AnalogClockPlugin::changeTheme()
+{
+    this->currentTheme = this->currentTheme == "light" ? "dark" : "light";
+    qDebug() << "ChangeTheme = " << this->currentTheme;
+
+    if (this->currentTheme == "dark")
+    {
+        this->graphicsScene->setBackgroundBrush(QColor(0, 0, 0));
+    }
+    else
+    {
+        this->graphicsScene->setBackgroundBrush(QColor(255, 255, 255));
     }
 }
 
