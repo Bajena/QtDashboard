@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->actionReload, SIGNAL(triggered()), this, SLOT(populatePluginsList()));
     populatePluginsList();
 }
 MainWindow::~MainWindow()
@@ -25,13 +26,5 @@ void MainWindow::populatePluginsList()
     pluginsDir.cd("Dashboard");
     pluginsDir.cd("plugins");
 
-    foreach (QString filename, pluginsDir.entryList(QDir::Files)) {
-        QString filepath = pluginsDir.absoluteFilePath(filename);
-        QPluginLoader loader(filepath);
-        QObject *plugin = loader.instance();
-        if (plugin) {
-            PluginInterfaceFactory* instanceFactory = qobject_cast<PluginInterfaceFactory*>(plugin);
-            PluginRepository::getInstance()->addPlugin(instanceFactory, filepath, instanceFactory->pluginName());
-        }
-    }
+    PluginRepository::getInstance()->loadPlugins(pluginsDir);
 }

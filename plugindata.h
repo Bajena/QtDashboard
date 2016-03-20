@@ -10,6 +10,7 @@ class PluginData
 {
 public:
     PluginData(PluginInterfaceFactory *instance, QString filepath = "", QString name = "");
+    ~PluginData();
     QString name;
     QString filePath;
     PluginInterfaceFactory *pluginFactory;

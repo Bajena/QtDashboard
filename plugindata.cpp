@@ -6,3 +6,8 @@ PluginData::PluginData(PluginInterfaceFactory *instance, QString filepath, QStri
     this->filePath = filepath;
     this->name = name;
 }
+
+PluginData::~PluginData()
+{
+    if (this->pluginFactory) delete this->pluginFactory;
+}

@@ -16,8 +16,10 @@ public:
     ~MainWindow();
 
 private:
-    void populatePluginsList();
     Ui::MainWindow *ui;
+
+private slots:
+    void populatePluginsList();
 };
 
 #endif // MAINWINDOW_H

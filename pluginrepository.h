@@ -3,6 +3,7 @@
 
 #include "plugindata.h"
 
+#include <QDir>
 #include <QList>
 
 class PluginRepository
@@ -19,10 +20,13 @@ public:
     QList<PluginData*> plugins;
 
     void addPlugin(PluginInterfaceFactory *factory, QString filepath = "", QString name = "");
+    void loadPlugins(QDir pluginsDirectory);
+    void loadPlugin(QString filepath);
     PluginInterfaceFactory *findFactoryByPluginName(QString pluginName);
 
 private:
     static PluginRepository* instance;
+    void clearPlugins();
 };
 
 #endif // PLUGINREPOSITORY_H
