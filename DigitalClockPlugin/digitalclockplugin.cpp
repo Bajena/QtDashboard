@@ -21,7 +21,9 @@ DigitalClockPlugin::~DigitalClockPlugin()
 
 void DigitalClockPlugin::initializeScene(QGraphicsScene *scene)
 {
-    this->timeItem = scene->addText(buildTimeString());
+    this->timeItem = scene->addText(buildTimeString(), QFont("Calibri", 72));
+    QRectF rect = this->timeItem->boundingRect();
+    this->timeItem->setPos(-rect.width() / 2, -rect.height() / 2);
     connect(scene, SIGNAL(sceneRectChanged(const QRectF &)), this, SLOT(scaleContents(const QRectF &)));
 }
 
@@ -50,15 +52,6 @@ QString DigitalClockPlugin::buildTimeString()
 
 void DigitalClockPlugin::scaleContents(const QRectF &rect)
 {
-    qDebug() << "scaleContents:" << rect;
-//    qreal minDimension = rect.width() < rect.height() ? rect.width() : rect.height();
-//    qDebug() << "minDimension: " << minDimension;
-//    qDebug() << "scale: " << minDimension / BASE_SIZE;
-
-//    foreach (QGraphicsItem *item, this->graphicsScene->items())
-//    {
-//        item->setScale(minDimension / BASE_SIZE);
-//    }
 }
 
 QString DigitalClockPluginFactory::pluginName()
