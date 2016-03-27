@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QGraphicsView>
 #include <QTime>
 
 #include "chartgraphicsitem.h"
@@ -21,14 +22,15 @@ void LineChartPlugin::initializeScene(QGraphicsScene *scene)
 {
     this->chartItem = new ChartGraphicsItem(0, 0, 100, 100);
     scene->addItem(chartItem);
-    QRectF sceneRect = scene->sceneRect();
-    this->chartItem->setRect(sceneRect);
+    this->chartItem->fetchNewValue();
 
     connect(scene, SIGNAL(sceneRectChanged(const QRectF &)), this, SLOT(scaleContents(const QRectF &)));
 }
 
 void LineChartPlugin::draw(QGraphicsScene *scene)
 {
+    this->chartItem->fetchNewValue();
+    scene->views().first()->viewport()->update();
 }
 
 int LineChartPlugin::refreshSpeed()
@@ -43,7 +45,8 @@ QList<QAction *> LineChartPlugin::contextMenuActions()
 
 void LineChartPlugin::scaleContents(const QRectF &rect)
 {
-
+    QRectF sceneRectHalf(rect.x() + 1, rect.y() + 1, rect.width() - 1, rect.height() - 1);
+    this->chartItem->setRect(sceneRectHalf);
 }
 
 QString LineChartPluginFactory::pluginName()

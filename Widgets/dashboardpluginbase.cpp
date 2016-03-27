@@ -59,9 +59,9 @@ void DashboardPluginBase::setPluginInstance(PluginInterface *instance)
     else
     {
         graphicsScene = new QGraphicsScene(this);
-        this->pluginInstance->initializeScene(graphicsScene);
         ui->graphicsView->setScene(graphicsScene);
         graphicsScene->setSceneRect(-ui->graphicsView->width()/2, -ui->graphicsView->height()/2, ui->graphicsView->width(), ui->graphicsView->height());
+        this->pluginInstance->initializeScene(graphicsScene);
         this->animationTimer = new QTimer(this);
         connect(this->animationTimer, SIGNAL(timeout()), this, SLOT(animate()));
         this->animationTimer->start(pluginInstance->refreshSpeed());
