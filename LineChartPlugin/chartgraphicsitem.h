@@ -35,6 +35,10 @@ private:
     QPointF zero();
     QLineF xAxis();
     QLineF yAxis();
+    void drawSeries(QPainter*);
+    void drawXTick(QPainter *painter, qreal x, ChartPoint &point);
+    qreal calculateX(qreal value, int seriesSize, int index);
+    void drawYTicks(QPainter *painter, int ticksCount, bool drawZeroTick = false);
 };
 
 #endif // CHARTGRAPHICSITEM_H
